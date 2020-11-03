@@ -82,6 +82,7 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
     	return false;
     }
 
+    //In generale non us. Coll
     @Override
     public Collection<U> getFollowedUsersInGroup(final String groupName) {
     	Collection<U> coll = new ArrayList<>();

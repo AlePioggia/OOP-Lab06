@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+
+
 
 /**
  * Example class using {@link java.util.List} and {@link java.util.Map}.
@@ -30,7 +33,8 @@ public final class UseCollection {
          * 1) Create a new ArrayList<Integer>, and populate it with the numbers
          * from 1000 (included) to 2000 (excluded).
          */
-    	ArrayList<Integer> arrList = new ArrayList<>();
+    	
+      	List<Integer> arrList = new ArrayList<>();
 
     	for (int i = 1000; i < SIZE;i++) {
     		arrList.add(i);
@@ -42,9 +46,9 @@ public final class UseCollection {
          * the same contents of the list of point 1.
          */
     	
-    	LinkedList<Integer> linkList = new LinkedList<>();
+    	List<Integer> linkList = new LinkedList<>(arrList);
     	
-    	linkList.addAll(arrList);
+    	//LinkList.addAll(arrList);
     	
         /*
          * 3) Using "set" and "get" and "size" methods, swap the first and last
@@ -73,13 +77,13 @@ public final class UseCollection {
          * TestPerformance.java.
          */
     	 
-    	Collection<Integer> coll = new ArrayList<Integer>();
-     	Collection<Integer> coll2 = new LinkedList<Integer>();
+    	List<Integer> l = new ArrayList<Integer>();
+     	List<Integer> l2 = new LinkedList<Integer>();
      	
-     	//
+     	
      	long timeInsertion = System.nanoTime();
      	for (int i = 0; i < ELEM; i++) {
-     		coll.add(i);
+     		l.add(0, i);;
      	}
      	timeInsertion = System.nanoTime() - timeInsertion;
      	System.out.println("ArrayList time to insert n elements in ns:" + timeInsertion
@@ -87,7 +91,7 @@ public final class UseCollection {
      	
      	long timeInsertion2 = System.nanoTime();
      	for (int i = 0; i < ELEM; i++) {
-     		coll2.add(i);
+     		l2.add(0,i);
      	}
      	timeInsertion2 = System.nanoTime() - timeInsertion2;
      	System.out.println("LinkedList time to insert n elements in ns:" + timeInsertion2 
@@ -100,13 +104,11 @@ public final class UseCollection {
          * times, use as example TestPerformance.java.
          */
      	
-     	//Codice commentato per via di problemi nella risoluzione
-     	/*long timeReadMiddle = System.nanoTime();
+     	long timeReadMiddle = System.nanoTime();
     
     	
     	for(int i = 0; i < ELEM_2 ;i++) {
-    		for(int j = 0;j < ELEM\2;j++) {	
-    		}
+    		l.get(l.size()/2);
     	}
     	
     	System.out.println("ArrayList time to read A[n/2] element in ns:" + timeReadMiddle
@@ -115,15 +117,14 @@ public final class UseCollection {
     	long timeRead2 = System.nanoTime();
     	
     	for(int i = 0; i < ELEM_2 ;i++) {
-    		for(int j = 0; i < ELEM/2; j++ ) {
-    		}
-    
+    		l2.get(l2.size()/2);
     	}
+    	
     	timeRead2 = System.nanoTime() - timeRead2;
     	System.out.println("LinkedList time to read A[n/2] element in ns:" + timeRead2 
     						+ "in ms: " + (timeRead2/TO_MS));
     	
-    	*/
+    	
      	
         /*
          * 7) Build a new Map that associates to each continent's name its
@@ -142,22 +143,24 @@ public final class UseCollection {
          * Oceania -> 38,304,000
          */
      	
-     	Map<String, Double> worldPopulation = new HashMap<>();
+    	//Rappr. con long
+     	Map<String, Long> worldPopulation = new HashMap<>();
     	
-    	worldPopulation.put("Africa", 11106635000.00);
-    	worldPopulation.put("Americas", 972_005_000.00);
-    	worldPopulation.put("Antartica", 0.00);
-    	worldPopulation.put("Asia", 4_298_723_000.00);
-    	worldPopulation.put("Europe", 742_452_000.00);
-    	worldPopulation.put("Oceania", 38_304_000.00);
+     	
+    	worldPopulation.put("Africa", 11106635000L);
+    	worldPopulation.put("Americas", 972_005_000L);
+    	worldPopulation.put("Antartica", 0L);
+    	worldPopulation.put("Asia", 4_298_723_000L);
+    	worldPopulation.put("Europe", 742_452_000L);
+    	worldPopulation.put("Oceania", 38_304_000L);
      	
         /*
          * 8) Compute the population of the world
          */
     	
-    	float sum = 0l;
+    	float sum = 0L;
     	
-    	for(double d : worldPopulation.values()) {
+    	for(long d : worldPopulation.values()) {
     		sum += d;
     	}
     	
