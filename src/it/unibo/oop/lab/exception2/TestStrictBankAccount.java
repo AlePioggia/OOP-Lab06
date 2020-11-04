@@ -10,7 +10,7 @@ import org.junit.Test;
  * {@link StrictBankAccount}.
  * 
  */
-public class TestStrictBankAccount {
+public final class TestStrictBankAccount {
 
     /**
      * Used to test Exceptions on {@link StrictBankAccount}.
