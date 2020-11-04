@@ -40,6 +40,9 @@ public class StrictBankAccount implements BankAccount {
             this.balance += amount;
             incTransactions();
         }
+        else {
+        	throw new WrongAccountHolderException(usrID);
+        }
     }
 
     /**
@@ -50,6 +53,12 @@ public class StrictBankAccount implements BankAccount {
         if (checkUser(usrID) && isWithdrawAllowed(amount)) {
             this.balance -= amount;
             incTransactions();
+        }
+        if (!checkUser(usrID)) {
+        	throw new WrongAccountHolderException(usrID);
+        }
+        if (!isWithdrawAllowed(amount)) {
+        	throw new NotEnoughFoundsException();
         }
     }
 
@@ -62,6 +71,9 @@ public class StrictBankAccount implements BankAccount {
             this.deposit(usrID, amount - StrictBankAccount.ATM_TRANSACTION_FEE);
             nTransactions++;
         }
+        else {
+        	throw new TransactionsOverQuotaException();
+        }
     }
 
     /**
@@ -72,6 +84,10 @@ public class StrictBankAccount implements BankAccount {
         if (nTransactions < nMaxATMTransactions) {
             this.withdraw(usrID, amount + StrictBankAccount.ATM_TRANSACTION_FEE);
         }
+        else {
+        	throw new TransactionsOverQuotaException();
+        }
+        
     }
 
     /**
@@ -100,6 +116,12 @@ public class StrictBankAccount implements BankAccount {
         if (checkUser(usrID) && isWithdrawAllowed(feeAmount)) {
             balance -= MANAGEMENT_FEE + nTransactions * StrictBankAccount.TRANSACTION_FEE;
             nTransactions = 0;
+        }
+        if (!checkUser(usrID)) {
+        	throw new WrongAccountHolderException(usrID);
+        }
+        if (!isWithdrawAllowed(feeAmount)) {
+        	throw new NotEnoughFoundsException();
         }
     }
 
